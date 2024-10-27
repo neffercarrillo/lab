@@ -1,0 +1,8 @@
+#! /usr/bin/env perl
+
+use warnings;
+use strict;
+
+my $pi = 3.141592654;
+print 12.5 * $pi * 2 . "\n";
+

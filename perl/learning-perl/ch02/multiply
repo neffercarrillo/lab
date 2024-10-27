@@ -1,0 +1,8 @@
+#! /usr/bin/env perl
+
+use warnings;
+use strict;
+
+chomp(my $x = <STDIN>);
+chomp(my $y = <STDIN>);
+print $x * $y . "\n";

@@ -1,0 +1,9 @@
+#! /usr/bin/env perl
+
+use warnings;
+use strict;
+
+my $pi = 3.141592654;
+chomp(my $radius = <STDIN>);
+print $radius * $pi * 2 . "\n";
+

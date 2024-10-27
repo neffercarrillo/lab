@@ -1,0 +1,36 @@
+use test
+
+db.grades.aggregate([
+	{
+		$unwind:"$scores"
+	}
+	,{
+		$match:{
+			$or:[{"scores.type":"homework"},{"scores.type":"exam"}]}
+	}
+	,{
+		$group:{
+			_id:{
+				student:"$student_id"
+				,class:"$class_id"
+				/*,score_type:"$scores.type"
+				,score:"$scores.score"*/
+			}
+			,avg_per_student:{$avg:"$scores.score"}
+		}
+	}
+	,{
+		$group:{
+			_id:{
+				/*student:"$student_id"*/
+				class:"$_id.class"
+			}
+			,avg_gpa_per_class:{$avg:"$avg_per_student"}
+		}
+	}
+	,{
+		$sort:{
+			avg_gpa_per_class:-1
+		}
+	}
+])	

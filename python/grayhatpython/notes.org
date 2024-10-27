@@ -1,0 +1,58 @@
+* Chapter 1: Setting Up Your Development Environment
+- Install python 2.5, Eclipse and PyDev (eclipse plugin)
+- ctypes -> one of the most powerful libraries available to the python dev.
+- Can use ctypes to call functions in dynamic link libraries (DLLs in Windows and SOs in Linux) and can crate C datatypes and utility functions for low-level memory manipulation.
+- Three ways to load dynamic libraries in ctypes: cdll(), windll(), and oledll().
+- Page 8: Table 1-1: Python to C Datatype Mapping
+|-----------------------------+----------------------------+-------------|
+| C Type                      | Python Type                | ctypes Type |
+|-----------------------------+----------------------------+-------------|
+| char                        | 1-character string         | c_char      |
+| wchar_t                     | 1-character unicode string | c_wchar     |
+| char                        | int/long                   | c_byte      |
+| char                        | int/long                   | c_ubyte     |
+| short                       | int/long                   | c_short     |
+| unsigned short              | int/long                   | c_ushort    |
+| int                         | int/long                   | c_int       |
+| unsinged int                | int/long                   | c_uint      |
+| long                        | int/long                   | c_long      |
+| unsinged long               | int/long                   | c_ulong     |
+| long long                   | int/long                   | c_longlong  |
+| unsigned long long          | int/long                   | c_ulonglong |
+| float                       | float                      | c_float     |
+| double                      | float                      | c_double    |
+| char * (NULL terminated)    | string or none             | c_char_p    |
+| wchar_t * (NULL terminated) | unicode or none            | c_wchar_p   |
+| void *                      | int/long or none           | c_void_p    |
+|-----------------------------+----------------------------+-------------|
+- deferencing a pointer -> access the contents of a pointer (ex: print(seitz.value))
+- when a function expects a pointer as a parameter, call it like this: function_main(byref(parameter)).
+- structure -> group of variables, which can be of the same or different datatypes.
+- access member variables in the strucutre by using dot notation: beer_recipe.amt_barley.
+- structure example in C:
+  struct beer_recipe
+  {
+      int amt_barley;
+      int amt_water;
+  }
+- structure example in python:
+  class beer_recipe(Structure):
+      _fields_ = [
+          ("amt_barley", c_int),
+          ("amt_water", c_int),
+      ]
+- unions -> similar to structures. in a union, all of the member variables share the same memory location.
+- example of a union in C:
+  union {
+      long    barley_long;
+      int     barley_int;
+      char    barley_char[8];
+  }barley_amount;
+- example in Python:
+  class barley_amount(Union):
+      _fields_ = [
+          ("barley_long", c_long),
+          ("barley_int", c_int),
+          ("barley_char", c_char * 8),
+      ]
+  
