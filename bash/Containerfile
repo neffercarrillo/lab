@@ -1,0 +1,9 @@
+FROM alpine
+
+RUN ["apk","add","vim","vim-doc","bash","git","tmux"]
+
+RUN ["apk", "add", "bash-completion"]
+
+CMD ["/bin/bash", "-l"]
+
+

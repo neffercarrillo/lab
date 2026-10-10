@@ -1,0 +1,166 @@
+# Unit 42 Wireshark Workshop
+
+## Part 1: Introduction & Prerequisites
+- YouTube Playlist URL - https://www.youtube.com/watch?v=wNEzfe9RI-I&list=PLaKGTLgARHpNPf_SzebsyKWIzAHjCnwLT
+- PCAP - Packet Capture
+- Files for this workshop - >  https://github.com/pan-unit42/wireshark-workshop
+- Password for zip archives: unit42
+
+## Part 2: Setting Up Wireshark
+
+### Wireshark Configuration Profiles
+- Make a copy of the default configuration profile (and rename it)
+
+### Web Trafic and Default Wireshark Display
+- Update display columns
+- What we should see for web traffic analyis
+- Date and time in UTC
+- Source address and port
+- Destination address and port
+- HTTP host name
+- HTTPS server name
+- Info
+
+### Removing and Adding Columns
+- Remove the following columns
+- Frame Number
+- Protocol
+- Frame length
+
+### Adding Custom Columns
+- Add column
+
+Update the column title
+
+Change the column type
+
+Drag column to its proper location
+
+Changing time to UTC Date and Time
+
+Hiding Columns
+
+Wireshark Search Filter Expressions
+
+Web Filter - Basic: (http.request or tls.handshake.type eq 1) and !(ssdp)
+
+Web Filter - Basic+: (http.request or tls.handshake.type eq 1 or tcp.flags eq 0x0002) and !(ssdp)
+
+Web Filter - Basic + DNS: (http.request or tls.handshake.type eq 1 or tcp.flags eq 0x0002 or dns) and !(ssdp)
+
+Export Wireshark Config
+
+## Part 3: Host Identification
+
+Host Information
+
+First three bytes of a MAC address represent the vendor ID
+
+Use dhcp in the filter line to get DHCP traffic and find a hostname
+
+Use nbns in the filter line to find traffic in a windows environment
+
+Operating System (OS) and Web Browser
+
+Use the basic web filter
+
+Find the first instance of a navigating to a webpage
+
+Follow the TCP Stream
+
+Find the user agent string
+
+Edg = chromium-based edge browser
+
+Edge = previous non-chromium browser
+
+Windows User Account Name
+
+Filter on kerberos.CNameString
+
+Find the first frame of the kerberos traffic
+
+Go to Kerberos > as-req > req-body > cname > cname-string >
+
+Apply it as a column for easy access
+
+Other Options for Windows Host Name
+
+Filter on smb
+
+If there is no smb traffic, filter on udp and ip contains DESKTOP-
+
+Remember to enclose the search string in quotes -> i.e "DESKTOP-"
+
+# Part 4: Non-Malicious Activity
+
+Operating System Traffic
+
+s-microsoft.com
+
+go.microsoft.com
+
+Many other microsoft.com domains...
+
+Traffic Caused by Web Browsers
+
+gvt1.com used for updates of chrome and edge
+
+firefox.com/mozilla.com domains are related to traffic created by firefox.
+
+the major browsers have dns over https enabled.
+
+this is not typical in enterprise environments.
+
+you can see one dns request over por 53 to a domain and the rest of the dns requests will be sent to a domain over https (i.e mozilla.dns-cloudflare.com)
+
+IRC traffic
+
+most servers and clients encrypt legitimagte irc comms by default
+
+## FTP traffic
+- use basic+dns filter
+- traffic to tcp port 21 is the ftp control channel
+- traffic to tcp high port is the ftp data channel
+- filter for ftp.request.commnd or ftp-data
+
+## Email Traffic
+- use filter for imap or pop or smtp
+
+## File Transfers Over SMB
+- dont fiter for anything
+- go to File > Export > SMB and look at the list of files downlloaded
+
+## Tor Traffic
+- HTTPS traffic to random domain over TCP ports 8080 and 8443
+
+# Part 5: Introduction to Windows Malware Infections
+
+## Mass Distribution (Commodity) Malware
+- Sent through email or through web.
+- Email -> attached zip -> extracted malware
+- Create traffic to malicious websites through ads
+- Legitimate websites are compromised and malicious code is injected to deliver malware
+
+## Malware -> Malicious HTTP Traffic
+
+### Lokibot
+- Lokibot has a user agent of "Charon; Inferno"
+- Example: Lokibot communicates to sites that contain fre.php
+
+### Formbook
+- Formbook malware
+- patterns of HTTP GET and POST requests -> look at the first characters of the requests.
+
+## Malware -> Malicious HTTPS/SSL/TLS Traffic
+
+### Dridex
+- Use urlhaus.abuse.ch to find if a url is malicious
+- Dridex uses IP address without domain names.
+- Find the certficate issuer data in the pcap.
+
+## Malware -> Malicious TCP Traffic
+- REMCOS RAT
+
+
+

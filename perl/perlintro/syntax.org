@@ -1,0 +1,39 @@
+* Syntax
+
+End statements with a semicolon.
+
+#+BEGIN_SRC perl
+
+  print "Hello!";
+
+#+END_SRC
+
+Use a hash symbol for comments.
+
+#+BEGIN_SRC perl
+
+  print "Hello!"; # This is a comment.
+
+#+END_SRC
+
+Use single or double quotes around literal strings.
+
+#+BEGIN_SRC perl
+
+  print 'Hello!';  # Single quotes.
+  print "Hello!";  # Double quotes.
+
+#+END_SRC
+
+Use double quotes to interpolate variables within a string.
+
+#+BEGIN_SRC perl
+
+  my $var = "Ron";
+
+  print 'Hello, $var!'; # This will fail.
+  print "Hello, $var!"; # This will print "Hello, Ron!"
+
+#+END_SRC
+
+

@@ -1,0 +1,30 @@
+* Scalars
+
+Scalars are single values.
+
+#+BEGIN_SRC perl
+
+  my $fruit = "orange";
+  my $number = 100;
+
+#+END_SRC
+
+Use my whenever you are declaring a variable.
+
+#+BEGIN_SRC perl
+
+  my $airport = "SLC";
+
+#+END_SRC
+
+There is a default value scalar - $_. It is used as the default argument to many functions in Perl.
+
+#+BEGIN_SRC perl
+
+  print $_; # 
+  print ;  # This will print $_ by default.
+
+#+END_SRC
+
+
+

@@ -1,0 +1,66 @@
+#!/usr/bin/perl
+
+use strict;
+use warnings;
+use Getopt::Long; 
+
+exit main(@ARGV);
+
+sub main {
+
+    my $debug;
+    my $verbose;
+    my $randomize;
+    my $interface;
+    my $mac;
+
+    GetOptions(
+        "help"  => \&usage_and_exit,
+        "debug" => \$debug,
+        "verbose" => \$verbose,
+        "randomize" => \$randomize,
+        "interface=s" => \$interface,
+        "mac=s" => \$mac,
+        ) or die "Issue while trying to parse options. Exiting.";
+    
+    # turn off inteface
+    print_if_verbose($verbose,"Turning off interface...");
+    
+    # change the mac address
+    print_if_verbose($verbose,"Changing MAC address...");
+    
+    # turn on interface
+    print_if_verbose($verbose,"Turning on the interface...");    
+
+    exit 0
+}
+
+sub debug {
+    my ($debug,$message) = @_;
+    if ($debug) {
+        print "DEBUG $message\n";        
+    }
+}
+
+sub print_if_verbose {
+    my ($verbose, $message) = @_;
+    if ($verbose) {
+        print "$message\n";
+    }
+}
+
+sub usage {
+    print "Usage: $0 [OPTIONS] INTERFACE MAC\n";
+    print "Change the MAC address of a given interface.\n";
+}
+
+sub usage_and_exit {
+    usage();
+    exit 0
+}
+
+sub change_mac {
+    my ($interface, $new_mac) = @_;
+    print "Changing MAC address for $interface to $new_mac...\n";
+    print "Change completed.\n";
+}
